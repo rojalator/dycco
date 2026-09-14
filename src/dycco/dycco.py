@@ -67,7 +67,6 @@ if ascii_module:
     ascii_location = ascii_module.submodule_search_locations[0] + '/asciidoc3.py'
     import asciidoc3.asciidoc3api as AsciiDoc3API
 
-
 COMMENT_PATTERN = r'^\s*#'
 
 DYCCO_ROOT = os.path.dirname(__file__)
@@ -78,8 +77,7 @@ DYCCO_CSS = os.path.join(DYCCO_RESOURCES, 'dycco.css')
 
 ### Documentation Generation
 
-def document(input_paths, output_dir, use_ascii:bool = False, escape_html:bool = False,
-             single_file:bool = False):
+def document(input_paths, output_dir, use_ascii: bool = False, escape_html: bool = False, single_file: bool = False):
     """Generates documentation for the Python files at the given `input_paths`
     by parsing each file into pairs of documentation and source code and
     rendering those pairs into an HTML file.
@@ -134,7 +132,7 @@ def document(input_paths, output_dir, use_ascii:bool = False, escape_html:bool =
 
 ### Parsing the Source
 
-def parse(src:str) -> defaultdict:
+def parse(src: str) -> defaultdict:
     """Parse the given source code in two passes. The first pass walks the
     *Abstract Syntax Tree* of the code, gathering up and noting the location
     of any docstrings. The second pass processes the code line by line,
@@ -177,7 +175,7 @@ def parse(src:str) -> defaultdict:
 
 #### First Pass
 
-def parse_docstrings(src:str, sections:defaultdict) -> set:
+def parse_docstrings(src: str, sections: defaultdict) -> set:
     """Parse the given `src` to find any docstrings, add them to the
     appropriate place in `sections`, and return a `set` of line numbers where
     the docstrings are. **Note:** Modifies `sections` in place.
@@ -196,7 +194,7 @@ def parse_docstrings(src:str, sections:defaultdict) -> set:
 
 #### Second Pass
 
-def parse_code(src:str, sections:defaultdict, skip_lines:set):
+def parse_code(src: str, sections: defaultdict, skip_lines: set):
     """Parse the given `src` line by line to gather source code and comments
     into the appropriate places in `sections`. Any line numbers in
     `skip_lines` are skipped. **Note:** Modifies `sections` in place.
@@ -294,10 +292,10 @@ def parse_code(src:str, sections:defaultdict, skip_lines:set):
             # way also preserves the order of the decorators.
             sections[next_section_number]['code'].insert(0, s)
 
+
 ### Rendering
 
-def render(title:str, sections:defaultdict, use_ascii:bool = False,
-           escape_html:bool = False, single_file:bool = False) -> str:
+def render(title: str, sections: defaultdict, use_ascii: bool = False, escape_html: bool = False, single_file: bool = False) -> str:
     """Renders the given sections, which should be the result of calling
     `parse` on a source code file, into HTML.
 
@@ -330,14 +328,14 @@ def render(title:str, sections:defaultdict, use_ascii:bool = False,
             'title': title,
             'sections': sections,
             'date': date,
-            }
+        }
         with open(DYCCO_TEMPLATE) as f:
             return pystache.render(f.read(), context)
 
 
 ### Preprocessors
 
-def preprocess_docs(docs:list, use_ascii:bool, escape_html:bool, raw:bool = False) -> str:
+def preprocess_docs(docs: list, use_ascii: bool, escape_html: bool, raw: bool = False) -> str:
     """Preprocess the given `docs`, which should be a `list` of strings, by
     joining them together and running them through Markdown or
     asciidoc3, unless `raw` is True, in which case we just return the text
@@ -378,10 +376,11 @@ def preprocess_docs(docs:list, use_ascii:bool, escape_html:bool, raw:bool = Fals
         # document sections to markdown()
         return markdown.markdown(sanitized_docs)
 
+
 #### Code - Pygments
 
 
-def preprocess_code(code:list, use_ascii:bool = False, raw:bool = False, language_name:str = 'python') -> str:
+def preprocess_code(code: list, use_ascii: bool = False, raw: bool = False, language_name: str = 'python') -> str:
     """Preprocess the given code, which should be a `list` of strings, by
     joining them together and running them through the Pygments syntax
     highlighter unless `raw` is True, when we just return the text
@@ -420,14 +419,16 @@ def make_sections() -> defaultdict:
     """Creates the special `sections` datastructure used to hold parsed
     documentation and code.
     """
+
     # A callable for use as the default object in the `defaultdict` we use to
     # represent the sections.
     def section() -> dict:
-        return {'docs': [], 'code': [],}
+        return {'docs': [], 'code': [], }
+
     return defaultdict(section)
 
 
-def should_filter(line:str, num:int) -> bool:
+def should_filter(line: str, num: int) -> bool:
     """Test the given line to see if it should be included. Excludes shebang
     lines, for now.
     """
@@ -440,7 +441,7 @@ def should_filter(line:str, num:int) -> bool:
     return False
 
 
-def make_output_path(filename, output_dir, extension:str = 'html') -> str:
+def make_output_path(filename, output_dir, extension: str = 'html') -> str:
     """Creates an appropriate output path for the given source file and output
     directory. The output file name will be the name of the source file
     without its original extension but with `html`, `md` or `adoc` as
@@ -537,7 +538,8 @@ class DocStringVisitor(ast.NodeVisitor):
 
                 # `splitlines()` will handily split on the `\n`, so we can deal with all the above
                 # variants quite easily
-                line_count = len(node.value.s.splitlines())
+                # line_count = len(node.value.s.splitlines())
+                line_count = len(node.value.value.splitlines())
                 if isinstance(self.current_node, ast.Module):
                     start_line = end_line - (line_count if line_count > 1 else 0)
                     target_line = start_line

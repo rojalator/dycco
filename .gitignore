@@ -5,7 +5,7 @@ dist
 .bzr
 .bzrignore
 .idea
-_*
+_*/
 env/
 dycco.egg-info/
 build/

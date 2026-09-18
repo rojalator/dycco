@@ -5,6 +5,9 @@ include requirements.txt
 include dycco/resources/*
 include Makefile
 recursive-include docs *.jpg *.md *.txt *.css *.html *.js *.svg *.json
+recursive-include src *.css
+recursive-include src *.html
+include *.lock
 global-include *.py *.ptl
 include docs/*.txt docs/*.css docs/*.html
-exclude Notneeded
+prune _Notneeded

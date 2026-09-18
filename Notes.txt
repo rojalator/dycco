@@ -1,2 +1,0 @@
-https://pypi.org/project/ast-comments/
-https://pypi.org/project/libcst/

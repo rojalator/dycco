@@ -1,3 +1,5 @@
+v1.1.0	2026-09-18 -- Converted to uv / pytest. Corrected AST problem
+
 v1.0.2  2022-03-17 -- New AST and Python 3 only operation. Added asciidoc3 option
 
 v1.0.1, 2014-05-03 -- Python 3 compatibility.

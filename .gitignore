@@ -1,3 +1,4 @@
+Notneeded/
 *.pyc
 MANIFEST
 dist
@@ -9,3 +10,70 @@ env/
 dycco.egg-info/
 build/
 *.~*~
+# Coverage data
+.coverage
+.idea/
+.venv/
+.env/
+env/
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Documentation
+# doc/api/
+objects.inv
+doc/literate
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+assets/
+PyTest_Report.html
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+
+# C extensions
+*.so
+
+
+# PyInstaller
+#   Usually these files are written by a python script from a template
+#   before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec

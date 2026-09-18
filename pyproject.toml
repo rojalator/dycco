@@ -1,12 +1,27 @@
 [project]
 name = "dycco"
-version = "0.1.0"
-description = "Add your description here"
+version = "1.1.0"
+description = "Literate-programming-style side-by-side documentation generator"
 readme = "README.md"
 authors = [
     { name = "R J Ladyman", email = "it@file-away.co.uk" }
 ]
 requires-python = ">=3.14"
+license = "MIT"
+
+classifiers=[
+    'Development Status :: 5 - Production/Stable',
+    'Environment :: Console',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Information Technology',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Topic :: Documentation',
+    'Topic :: Software Development :: Documentation',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+]
+
 dependencies = [
     "importlib-metadata==5.0.0",
     "markdown>=2.4",
@@ -18,9 +33,13 @@ dependencies = [
 [project.scripts]
 dycco = "dycco:main"
 
+#[build-system]
+#requires = ["uv_build>=0.12.1,<0.13.0"]
+#build-backend = "uv_build"
+
 [build-system]
-requires = ["uv_build>=0.12.1,<0.13.0"]
-build-backend = "uv_build"
+requires = ["setuptools>=70", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [dependency-groups]
 dev = [
@@ -30,3 +49,6 @@ dev = [
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["dycco*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

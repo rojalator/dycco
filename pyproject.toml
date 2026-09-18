@@ -32,10 +32,6 @@ dependencies = [
 [project.scripts]
 dycco = "dycco.cli:main"
 
-#[build-system]
-#requires = ["uv_build>=0.12.1,<0.13.0"]
-#build-backend = "uv_build"
-
 [build-system]
 requires = ["setuptools>=70", "wheel"]
 build-backend = "setuptools.build_meta"
@@ -43,8 +39,9 @@ build-backend = "setuptools.build_meta"
 [dependency-groups]
 dev = [
     "check-manifest>=0.51",
+    "pydoctor>=25.10.1",
     "pytest>=9.1.1",
-    "wheel"
+    "wheel",
 ]
 
 [tool.setuptools.packages.find]

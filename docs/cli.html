@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>cli.py</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="dycco.css">
+</head>
+<body>
+<div id="container">
+    <div id="background"></div>
+    <table cellpadding="0" cellspacing="0">
+        <thead>
+        <tr>
+            <th class="docs">
+                <h1>cli.py</h1>
+            </th>
+            <th class="code">
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="section-0">
+            <td class="docs">
+                <div class="pilwrap">
+                    <a class="pilcrow" href="#section-0">&#182;</a>
+                </div>
+                
+            </td>
+            <td class="code">
+                <div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">document</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+</pre></div>
+
+            </td>
+        </tr>
+        <tr id="section-7">
+            <td class="docs">
+                <div class="pilwrap">
+                    <a class="pilcrow" href="#section-7">&#182;</a>
+                </div>
+                
+            </td>
+            <td class="code">
+                <div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">do_main</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">use_ascii</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">escape_html</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">single_file</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">document</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">use_ascii</span><span class="p">,</span> <span class="n">escape_html</span><span class="p">,</span> <span class="n">single_file</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'Unable to open file: </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'An error occurred: </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+
+            </td>
+        </tr>
+        <tr id="section-20">
+            <td class="docs">
+                <div class="pilwrap">
+                    <a class="pilcrow" href="#section-20">&#182;</a>
+                </div>
+                
+            </td>
+            <td class="code">
+                <div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">arg_parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">'dycco'</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">'Literate-style documentation generator.'</span><span class="p">)</span>
+    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">'source_file'</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">'+'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'Source files to document'</span><span class="p">)</span>
+    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">'-o'</span><span class="p">,</span> <span class="s1">'--output-dir'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">'docs'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'Output directory (will be created if necessary)'</span><span class="p">)</span>
+    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">'-a'</span><span class="p">,</span> <span class="s1">'--asciidoc3'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">'use_ascii'</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s1">'Process with asciidoc3 instead of markdown (you will have to install asciidoc3, of course)'</span><span class="p">)</span>
+    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">'-e'</span><span class="p">,</span> <span class="s1">'--escape-html'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">'escape_html'</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s1">'Run the documentation through html.escape() before markdown or asciidoc3'</span><span class="p">)</span>
+    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">'-f'</span><span class="p">,</span> <span class="s1">'--single-file'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">'single_file'</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s1">'Just produce a .md or .adoc file in single-column to be processed externally'</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">arg_parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">do_main</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">source_file</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">use_ascii</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">escape_html</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">single_file</span><span class="p">)</span>
+</pre></div>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <footer>
+        Generated by <b><a href="https://github.com/rojalator/dycco">Dycco</a></b>.
+        Last updated <b>18 Sep 2026</b>.
+    </footer>
+</div>
+</body>
+</html>

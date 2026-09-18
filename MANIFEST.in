@@ -1,7 +1,5 @@
-include CHANGES.txt
-include LICENSE.txt
+include include *.txt
 include README.md
-include requirements.txt
 include dycco/resources/*
 include Makefile
 recursive-include docs *.jpg *.md *.txt *.css *.html *.js *.svg *.json
@@ -11,3 +9,4 @@ include *.lock
 global-include *.py *.ptl
 include docs/*.txt docs/*.css docs/*.html
 prune _Notneeded
+prune .python-version

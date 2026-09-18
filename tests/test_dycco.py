@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.dycco import dycco
+from dycco import dycco
 
 # We read files from this directory. New files can be added with an appropriate test
 # or tests in this directory

@@ -1,0 +1,8 @@
+Acknowledgements
+================
+
+This code (dycco) is a rewrite of the original by Will.
+
+---------
+Will McCutchen
+Robert Ladyman

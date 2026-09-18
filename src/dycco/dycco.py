@@ -29,8 +29,8 @@ taken straight from [Pycco][pycco], then updated to match the latest changes
 to [Docco][docco]'s.
 
 [docco]: https://ashkenas.com/docco/
-[markdown]: http://daringfireball.net/projects/markdown/
-[pygments]: http://pygments.org/
+[markdown]: https://daringfireball.net/projects/markdown/
+[pygments]: https://pygments.org/
 [dycco]: https://github.com/mccutchen/dycco
 [pycco]: https://github.com/pycco-docs/pycco
 [mustache]: https://github.com/peterldowns/python-mustache
@@ -312,7 +312,7 @@ def render(title: str, sections: defaultdict, use_ascii: bool = False, escape_ht
     } for key, value in sorted(sections.items())]
 
     # We include a timestamp in the footer.
-    date = datetime.datetime.utcnow().strftime('%d %b %Y')
+    date = datetime.datetime.now(datetime.UTC).strftime('%d %b %Y')
 
     if single_file:
         # For a `single_file` we just weld all the gubbins together, the code

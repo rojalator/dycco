@@ -2,7 +2,7 @@
 
 """**Dycco** is another Python port of [Docco][docco], the quick-and-dirty,
 hundred-line-long, literate-programming-style documentation generator. This
-particular version has been updated to work with Python 3 (as of 2022).
+particular version has been updated to work with Python 3 (as of 2026).
 
 This version allows output to a markdown file or to an asciidoc3 file, as well
 as adding a option to sanitize internal HTML (which is handy if your code
@@ -52,7 +52,7 @@ import markdown
 import pystache
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
-from pygments.formatters import HtmlFormatter
+from pygments.formatters.html import HtmlFormatter
 
 # We have to muck about a bit because of asciidoc3's strange behaviour
 # See: [AttributeError: module 'asciidoc3' has no attribute 'messages'](https://gitlab.com/asciidoc3/asciidoc3/-/issues/5)

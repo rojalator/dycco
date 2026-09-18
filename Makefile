@@ -23,3 +23,10 @@ clean:
 # Run from top-level directory. Creates a pytest html report and a coverage report (in htmlcov)
 test:
 	uv run pytest -s  --html PyTest_Report.html --cov=./ --cov-report html --log-cli-level=DEBUG
+
+
+build: clean documentation
+	uv build --clear
+
+publish_to_test:
+	uv publish --publish-url https://test.pypi.org/legacy/ --verbose
